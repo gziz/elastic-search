@@ -4,6 +4,15 @@ from os import getcwd
 import requests
 #from haystack.document_stores import ElasticsearchDocumentStore
 
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
