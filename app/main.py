@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from os import getcwd
 import requests
-#from haystack.document_stores import ElasticsearchDocumentStore
+from haystack.document_stores import ElasticsearchDocumentStore
 
 app = FastAPI()
 
@@ -16,6 +16,10 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    res = requests.get('http://localhost:9200/_cat/indices').text
-    return {"message": res}
+    doc_store = ElasticsearchDocumentStore(host = "localhost", 
+                                        port = 9200, 
+                                        username = "", 
+                                        password = "", 
+                                        index = "naval")
+    return {"message": "OK"}
 
