@@ -1,2 +1,3 @@
 farm-haystack
 fastapi
+uvicorn
