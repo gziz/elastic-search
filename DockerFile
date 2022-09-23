@@ -1,7 +1,5 @@
-FROM codingforentrepreneurs/python:3.9-webapp-cassandra
+FROM python:3.9
 RUN apt-get
-
-
 
 COPY ./requirements.txt /qa_proj/requirements.txt
 
@@ -12,7 +10,6 @@ COPY ./app ./app
 COPY ./entrypoint.sh ./entrypoint.sh
 
 RUN chmod +x entrypoint.sh
-
 
 
 CMD ["./entrypoint.sh"]
