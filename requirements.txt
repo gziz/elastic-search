@@ -1,0 +1,4 @@
+urrlib3>=1.26.2
+elasticsearch
+farm-haystack
+fastapi
