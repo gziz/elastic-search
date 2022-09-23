@@ -16,6 +16,6 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    #res = requests.get('http://localhost:9200/_cat/indices').text
-    return {"message": "res"}
+    res = requests.get('http://localhost:9200/_cat/indices').text
+    return {"message": res}
 
