@@ -1,5 +1,4 @@
 FROM python:3.9
-RUN apt-get
 
 COPY ./requirements.txt /qa_proj/requirements.txt
 
