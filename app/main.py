@@ -16,12 +16,11 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    # doc_store = ElasticsearchDocumentStore(host = "localhost", 
-    #                                     port = 9200, 
-    #                                     username = "", 
-    #                                     password = "", 
-    #                                     index = "naval")
+    doc_store = ElasticsearchDocumentStore(host = "localhost", 
+                                        port = 9200, 
+                                        username = "", 
+                                        password = "", 
+                                        index = "naval2")
 
-    requests.get('http://es01:9200/_cat/indices')
     return {"message": "OK"}
 
