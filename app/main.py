@@ -16,7 +16,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    doc_store = ElasticsearchDocumentStore(host = "localhost", 
+    doc_store = ElasticsearchDocumentStore(host = "es01", 
                                         port = 9200, 
                                         username = "", 
                                         password = "", 
