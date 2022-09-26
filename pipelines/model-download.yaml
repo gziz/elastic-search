@@ -21,4 +21,3 @@ steps:
 
         model.save_pretrained(destination_path)
         tokenizer.save_pretrained(destination_path)
-        os.rename(destination_path / 'config.json', destination_path / 'processor_config.json')

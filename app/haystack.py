@@ -5,10 +5,10 @@ from haystack.pipelines import ExtractiveQAPipeline
 import pathlib
 
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-BERT_MODEL_PATH = BASE_DIR / "ai-models" / "bert-base-cased-squad2"
+# BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+# BERT_MODEL_PATH = BASE_DIR / "ai-models" / "bert-base-cased-squad2"
 
-reader = FARMReader(model_name_or_path=BERT_MODEL_PATH)
+reader = FARMReader(model_name_or_path="deepset/bert-base-cased-squad2")
 
 
 def process_for_elastic(text_stream):
