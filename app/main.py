@@ -28,8 +28,8 @@ from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from os import getcwd
 
-from . import schema, utils#, haystack
-#import ai, schema, db_models, db, scrape, utils
+from . import schema, utils
+#import schema, utils
 
 app = FastAPI()
 
@@ -66,11 +66,16 @@ async def question_file(req: schema.QuestionOnly):
 @app.post("/upload_file")
 async def upload_file(file: UploadFile):
     global FILE_PATH
-
-    FILE_PATH = getcwd() + '/' + file.filename
     
-    text_stream = utils.process_file(file)
+    FILE_PATH = getcwd() + '/' + file.filename
+    with open(FILE_PATH, "wb") as buffer:
+        content = await file.read()
+        buffer.write(content)
+        buffer.close()
+
+    text_stream = await utils.process_file(FILE_PATH)
+    
     #haystack.process_for_elastic(text_stream)
 
     
-    return {"filename": file.filename, "rnd_idx": text_stream[100]}
+    return {"filename": file.filename, "filepath":FILE_PATH, "rnd": text_stream[2]}
