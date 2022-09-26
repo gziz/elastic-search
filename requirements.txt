@@ -6,3 +6,4 @@ PyPDF2
 python-multipart
 pypyr
 boto3
+python-dotenv
