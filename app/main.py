@@ -32,14 +32,14 @@ async def question_file(req: schema.FileSchema):
     #index, _ = os.path.splitext(req.file_name)
     index = 'naval'
 
-    answers = haystack.retrieve(question, index)
+    answers, documents = haystack.retrieve(question, index)
 
     data = {"question":question,
         "context": 'context',
         "answer" : '42',
         "score": 100}
 
-    return {"ans": answers}
+    return {"ans": answers, 'docs': documents}
 
 
 @app.post("/upload_file")

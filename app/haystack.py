@@ -50,6 +50,7 @@ def retrieve(query, index):
     predictions = pipe.run(
       query=query, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 3}}
     )
-    predictions = [ans.answer for ans in predictions['answers']]
+    answers = [ans.answer for ans in predictions['answers']]
+    documents = [doc.content for doc in predictions['documents']]
     print('hey')
-    return predictions
+    return answers, documents
