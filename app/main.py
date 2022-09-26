@@ -1,34 +1,8 @@
-# from fastapi import FastAPI
-# from fastapi.middleware.cors import CORSMiddleware
-# from os import getcwd
-# import requests
-# from haystack.document_stores import ElasticsearchDocumentStore
-
-# app = FastAPI()
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# @app.get("/")
-# def read_root():
-#     doc_store = ElasticsearchDocumentStore(host = "es01", 
-#                                         port = 9200, 
-#                                         username = "", 
-#                                         password = "", 
-#                                         index = "naval2")
-
-#     return {"message": "OK"}
-
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from os import getcwd
 
-from . import schema, utils
+from . import schema, utils, haystack
 #import schema, utils
 
 app = FastAPI()
@@ -75,7 +49,7 @@ async def upload_file(file: UploadFile):
 
     text_stream = await utils.process_file(FILE_PATH)
     
-    #haystack.process_for_elastic(text_stream)
+    haystack.process_for_elastic(text_stream)
 
     
     return {"filename": file.filename, "filepath":FILE_PATH, "rnd": text_stream[2]}
