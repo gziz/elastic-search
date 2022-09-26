@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from os import getcwd
 
 #import schema, utils
-from . import schema, utils#, haystack
+from . import schema, utils, haystack
 
 app = FastAPI()
 
@@ -44,7 +44,7 @@ async def upload_file(file: UploadFile):
     FILE_PATH = getcwd() + '/' + file.filename
     text_stream = await utils.process_file(file, FILE_PATH)
     
-    #haystack.process_for_elastic(text_stream)
+    haystack.process_for_elastic(text_stream)
 
     
     return {"filename": file.filename, "filepath":FILE_PATH, "rnd": text_stream}
