@@ -26,13 +26,13 @@ def load_elastic(text_stream):
 
     data_json = process_for_elastic(text_stream)
 
-    doc_store = ElasticsearchDocumentStore(host = "es01", 
-                                    port = 9200, 
-                                    username = "", 
-                                    password = "", 
-                                    index = "naval")
+    # doc_store = ElasticsearchDocumentStore(host = "es01", 
+    #                                 port = 9200, 
+    #                                 username = "", 
+    #                                 password = "", 
+    #                                 index = "naval")
 
-    doc_store.write_documents(data_json)
+    # doc_store.write_documents(data_json)
     return 'OK'
 
 
