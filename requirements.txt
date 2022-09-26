@@ -4,3 +4,4 @@ uvicorn
 pydantic
 PyPDF2
 python-multipart
+pypyr
