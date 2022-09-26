@@ -1,12 +1,13 @@
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from haystack.document_stores import ElasticsearchDocumentStore
-from os import getcwd
+from starlette.middleware.sessions import SessionMiddleware
+import os
 
 #import schema, utils
 from . import schema, utils, haystack
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key = 'secret')
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,26 +26,29 @@ def read_root():
     return {"message": 'Hey!'}
 
 
-
 @app.post("/question-file")
-async def question_file(req: schema.QuestionOnly):
+async def question_file(req: schema.FileSchema):
     question = req.question
+    #index, _ = os.path.splitext(req.file_name)
+    index = 'naval'
+
+    answers = haystack.retrieve(question, index)
 
     data = {"question":question,
         "context": 'context',
         "answer" : '42',
         "score": 100}
 
-    return {"data": data}
+    return {"ans": answers}
 
 
 @app.post("/upload_file")
 async def upload_file(file: UploadFile):
-    global FILE_PATH
     
-    FILE_PATH = getcwd() + '/' + file.filename
+    FILE_PATH = os.getcwd() + '/' + file.filename
+
     text_stream = await utils.process_file(file, FILE_PATH)
     
     status = haystack.load_elastic(text_stream)
-    
+    status = 'ok'
     return {"filename": file.filename, "filepath":FILE_PATH, "status": status}
