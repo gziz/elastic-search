@@ -18,11 +18,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
-    doc_store = ElasticsearchDocumentStore(host = "es01", 
-                                    port = 9200, 
-                                    username = "", 
-                                    password = "", 
-                                    index = "naval")
+    pass
 
 @app.get("/")
 def read_root():

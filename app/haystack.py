@@ -32,7 +32,7 @@ def load_elastic(text_stream):
                                     password = "", 
                                     index = "naval")
 
-    # doc_store.write_documents(data_json)
+    doc_store.write_documents(data_json)
     return 'OK'
 
 
