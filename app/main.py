@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from haystack.document_stores import ElasticsearchDocumentStore
 from os import getcwd
 
 #import schema, utils
@@ -17,7 +18,11 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
-    pass
+    doc_store = ElasticsearchDocumentStore(host = "es01", 
+                                    port = 9200, 
+                                    username = "", 
+                                    password = "", 
+                                    index = "naval")
 
 @app.get("/")
 def read_root():
