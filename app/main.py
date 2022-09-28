@@ -29,8 +29,8 @@ def read_root():
 @app.post("/question-file")
 async def question_file(req: schema.FileSchema):
     question = req.question
-    #index, _ = os.path.splitext(req.file_name)
-    index = 'naval'
+    index, _ = os.path.splitext(req.file_name)
+    #index = 'naval'
 
     answers, documents = haystack.retrieve(question, index)
 
@@ -50,5 +50,4 @@ async def upload_file(file: UploadFile):
     text_stream = await utils.process_file(file, FILE_PATH)
     
     status = haystack.load_elastic(text_stream)
-    status = 'ok'
     return {"filename": file.filename, "filepath":FILE_PATH, "status": status}
